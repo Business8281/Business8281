@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 340" width="100%" height="100%">
+  <defs>
+    <!-- Card Shadow -->
+    <filter id="boxShadow" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#000000" flood-opacity="0.04" />
+    </filter>
+
+    <!-- Branch Gradients -->
+    <linearGradient id="mainBranch" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2563EB" />
+      <stop offset="100%" stop-color="#3B82F6" />
+    </linearGradient>
+
+    <linearGradient id="aiBranch" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#EC4899" />
+      <stop offset="100%" stop-color="#F43F5E" />
+    </linearGradient>
+
+    <linearGradient id="appBranch" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8B5CF6" />
+      <stop offset="100%" stop-color="#A855F7" />
+    </linearGradient>
+
+    <linearGradient id="webBranch" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10B981" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+
+    <!-- Glow Filter -->
+    <filter id="nodeGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <style>
+    .title-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; font-weight: 700; fill: #0F172A; letter-spacing: 0.5px; }
+    .subtitle-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #64748B; font-weight: 500; }
+    .branch-label { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; font-weight: 700; }
+    .commit-hash { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; font-weight: 600; fill: #64748B; }
+    .commit-desc { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11.5px; font-weight: 600; fill: #1E293B; }
+    .pipeline-label { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10px; font-weight: 600; fill: #475569; }
+
+    @keyframes pulseNode {
+      0%, 100% { r: 6px; stroke-width: 3px; }
+      50% { r: 8px; stroke-width: 4px; }
+    }
+
+    @keyframes flowDashes {
+      to { stroke-dashoffset: -48; }
+    }
+
+    @keyframes statusBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .pulse-blue { animation: pulseNode 2s infinite ease-in-out; }
+    .pulse-pink { animation: pulseNode 2.3s infinite ease-in-out; }
+    .pulse-purple { animation: pulseNode 2.6s infinite ease-in-out; }
+    .pulse-green { animation: pulseNode 2.1s infinite ease-in-out; }
+    .flow-line { stroke-dasharray: 6, 6; animation: flowDashes 2.5s linear infinite; }
+    .live-indicator { animation: statusBlink 1.8s infinite ease-in-out; }
+  </style>
+
+  <!-- Clean Pure White Card Container -->
+  <rect x="2" y="2" width="896" height="336" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" filter="url(#boxShadow)" />
+
+  <!-- Top Header Bar -->
+  <line x1="2" y1="52" x2="898" y2="52" stroke="#F1F5F9" stroke-width="1.5" />
+
+  <!-- Window Indicator Dots -->
+  <circle cx="30" cy="26" r="5" fill="#EF4444" />
+  <circle cx="46" cy="26" r="5" fill="#F59E0B" />
+  <circle cx="62" cy="26" r="5" fill="#10B981" />
+
+  <text x="86" y="30" class="title-text">GIT COMMIT GRAPH &amp; CONTINUOUS DEPLOYMENT</text>
+
+  <!-- ==================== GIT GRAPH SECTION ==================== -->
+
+  <!-- Branch Track 1: main (y = 90) -->
+  <line x1="160" y1="90" x2="840" y2="90" stroke="#DBEAFE" stroke-width="3" />
+  <line x1="160" y1="90" x2="840" y2="90" stroke="url(#mainBranch)" stroke-width="2" class="flow-line" />
+  <text x="40" y="94" class="branch-label" fill="#1D4ED8" font-size="11.5px">● main</text>
+
+  <!-- Branch Track 2: feat/ai-rag (y = 145) -->
+  <path d="M 230 90 C 260 90, 260 145, 290 145 L 840 145" fill="none" stroke="#FCE7F3" stroke-width="3" />
+  <path d="M 230 90 C 260 90, 260 145, 290 145 L 840 145" fill="none" stroke="url(#aiBranch)" stroke-width="2" class="flow-line" />
+  <text x="40" y="149" class="branch-label" fill="#BE185D" font-size="11.5px">● feat/ai-rag</text>
+
+  <!-- Branch Track 3: feat/apps (y = 200) -->
+  <path d="M 370 90 C 400 90, 400 200, 430 200 L 840 200" fill="none" stroke="#F3E8FF" stroke-width="3" />
+  <path d="M 370 90 C 400 90, 400 200, 430 200 L 840 200" fill="none" stroke="url(#appBranch)" stroke-width="2" class="flow-line" />
+  <text x="40" y="204" class="branch-label" fill="#7E22CE" font-size="11.5px">● feat/apps</text>
+
+  <!-- Branch Track 4: feat/web (y = 255) -->
+  <path d="M 520 90 C 550 90, 550 255, 580 255 L 840 255" fill="none" stroke="#D1FAE5" stroke-width="3" />
+  <path d="M 520 90 C 550 90, 550 255, 580 255 L 840 255" fill="none" stroke="url(#webBranch)" stroke-width="2" class="flow-line" />
+  <text x="40" y="259" class="branch-label" fill="#047857" font-size="11.5px">● feat/web</text>
+
+  <!-- Commits on Main -->
+  <g transform="translate(190, 90)">
+    <circle cx="0" cy="0" r="6" fill="#FFFFFF" stroke="#2563EB" stroke-width="3" class="pulse-blue" filter="url(#nodeGlow)" />
+    <text x="14" y="-7" class="commit-hash">c72a91f</text>
+    <text x="14" y="8" class="commit-desc">release(v2.4): Core Architecture</text>
+  </g>
+
+  <!-- Commits on AI Branch -->
+  <g transform="translate(320, 145)">
+    <circle cx="0" cy="0" r="6" fill="#FFFFFF" stroke="#EC4899" stroke-width="3" class="pulse-pink" filter="url(#nodeGlow)" />
+    <text x="14" y="-7" class="commit-hash">8e11a3d</text>
+    <text x="14" y="8" class="commit-desc">feat(rag): AI Agents &amp; WhatsApp</text>
+  </g>
+
+  <!-- Commits on Apps Branch -->
+  <g transform="translate(470, 200)">
+    <circle cx="0" cy="0" r="6" fill="#FFFFFF" stroke="#8B5CF6" stroke-width="3" class="pulse-purple" filter="url(#nodeGlow)" />
+    <text x="14" y="-7" class="commit-hash">4f8b21c</text>
+    <text x="14" y="8" class="commit-desc">feat(mobile): PrepAssist &amp; CampusOne</text>
+  </g>
+
+  <!-- Commits on Web Branch -->
+  <g transform="translate(620, 255)">
+    <circle cx="0" cy="0" r="6" fill="#FFFFFF" stroke="#10B981" stroke-width="3" class="pulse-green" filter="url(#nodeGlow)" />
+    <text x="14" y="-7" class="commit-hash">19d80ef</text>
+    <text x="14" y="8" class="commit-desc">feat(web): 19 Client Web Platforms</text>
+  </g>
+
+  <!-- Merge Back to Main Node -->
+  <path d="M 770 145 C 790 145, 790 90, 810 90" fill="none" stroke="#DBEAFE" stroke-width="2" stroke-dasharray="3,3" />
+  <path d="M 770 200 C 795 200, 795 90, 810 90" fill="none" stroke="#DBEAFE" stroke-width="2" stroke-dasharray="3,3" />
+  <path d="M 770 255 C 800 255, 800 90, 810 90" fill="none" stroke="#DBEAFE" stroke-width="2" stroke-dasharray="3,3" />
+  
+  <g transform="translate(810, 90)">
+    <circle cx="0" cy="0" r="7" fill="#2563EB" stroke="#93C5FD" stroke-width="3" />
+    <text x="-40" y="-12" class="commit-hash" fill="#1D4ED8" font-weight="700">HEAD ➜ prod</text>
+  </g>
+
+  <!-- ==================== BOTTOM CI/CD PIPELINE STRIP ==================== -->
+  <g transform="translate(60, 312)">
+    <!-- Stage 1 -->
+    <text x="0" y="3.5" class="pipeline-label">Code Quality Verified</text>
+    <text x="155" y="3.5" fill="#CBD5E1">───</text>
+
+    <!-- Stage 2 -->
+    <text x="195" y="3.5" class="pipeline-label">Build Matrix Passed</text>
+    <text x="345" y="3.5" fill="#CBD5E1">───</text>
+
+    <!-- Stage 3 -->
+    <text x="385" y="3.5" class="pipeline-label">Cloudflare Edge Sync</text>
+    <text x="545" y="3.5" fill="#CBD5E1">───</text>
+
+    <!-- Stage 4 -->
+    <text x="585" y="3.5" class="pipeline-label">23 Production Endpoints Healthy</text>
+  </g>
+</svg>
